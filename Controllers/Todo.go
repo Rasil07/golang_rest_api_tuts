@@ -20,7 +20,7 @@ func GetTodos( c *gin.Context){
 	}
 }
 
-func CreateTodo ( c *gin.Context){
+func CreateTodo( c *gin.Context){
 	var todo Models.Todo
 	c.BindJSON(&todo)
 
@@ -32,4 +32,44 @@ func CreateTodo ( c *gin.Context){
 	}else{
 		c.JSON(http.StatusOK,todo)
 	}
+}
+
+func GetById(c *gin.Context){
+	var todo Models.Todo
+	id:= c.Param("id")
+
+	err:=Models.GetTodoById(&todo,id)
+
+	if err!=nil{
+		fmt.Println(err.Error())
+		c.AbortWithStatus(http.StatusNotFound)
+	}else{
+		c.JSON(http.StatusOK,todo)
+	}
+}
+
+func UpdateById(c *gin.Context){
+	var todo Models.Todo
+	id:= c.Param("id")
+
+	err := Models.GetTodoById( &todo , id)
+	if err!=nil{
+		c.JSON(http.StatusNotFound,todo)
+	}
+
+	c.BindJSON(&todo)
+
+	err = Models.UpdateTodoById(&todo)
+
+
+
+	if err!=nil{
+		fmt.Println(err.Error())
+		c.AbortWithStatus(http.StatusNotFound)
+	}else{
+		c.JSON(http.StatusOK,todo)
+	}
+
+	
+
 }

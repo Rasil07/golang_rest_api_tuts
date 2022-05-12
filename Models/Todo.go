@@ -22,3 +22,18 @@ func CreateTodo(todo *Todo) (err error){
 	}
 	return nil
 }
+
+func GetTodoById(todo *Todo,id string) (err error){
+	if err = Config.DB.Where("id=?",id).First(todo).Error;err!=nil{
+		return err
+	}
+	return nil
+}
+
+func UpdateTodoById(todo *Todo)(err error){
+	if err=Config.DB.Save(todo).Error;err!=nil{
+		return err
+	}else{
+return nil
+	}
+}
