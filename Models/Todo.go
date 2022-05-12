@@ -37,3 +37,11 @@ func UpdateTodoById(todo *Todo)(err error){
 return nil
 	}
 }
+
+func DeleteTodosById(todo *Todo)(err error){
+	if err=Config.DB.Delete(todo).Error;err!=nil{
+		return err
+	}else{
+		return nil
+	}
+}
