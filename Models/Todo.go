@@ -6,42 +6,41 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
+func GetAllTodos(todo *[]Todo) (err error) {
 
-func GetAllTodos(todo *[]Todo) (err error){
-	
-	if err = Config.DB.Find(todo).Error;err!=nil{
+	if err = Config.DB.Find(todo).Error; err != nil {
 		return err
 	}
 	return nil
 }
 
-func CreateTodo(todo *Todo) (err error){
-	
-	if err = Config.DB.Create(todo).Error;err!=nil{
+func CreateTodo(todo *Todo) (err error) {
+
+	if err = Config.DB.Create(todo).Error; err != nil {
 		return err
 	}
 	return nil
 }
 
-func GetTodoById(todo *Todo,id string) (err error){
-	if err = Config.DB.Where("id=?",id).First(todo).Error;err!=nil{
+func GetTodoById(todo *Todo, id string) (err error) {
+	if err = Config.DB.Where("id=?", id).First(todo).Error; err != nil {
 		return err
 	}
 	return nil
 }
 
-func UpdateTodoById(todo *Todo)(err error){
-	if err=Config.DB.Save(todo).Error;err!=nil{
+func UpdateTodoById(todo *Todo) (err error) {
+	if err = Config.DB.Save(todo).Error; err != nil {
 		return err
-	}else{
-return nil
+	} else {
+		return nil
 	}
 }
 
-func DeleteTodosById(todo *Todo)(err error){
-	if err=Config.DB.Delete(todo).Error;err!=nil{
+func DeleteTodosById(todo *Todo) (err error) {
+	if err = Config.DB.Delete(todo).Error; err != nil {
 		return err
-	}else{
+	} else {
 		return nil
 	}
 }
